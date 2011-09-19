@@ -1,0 +1,24 @@
+!! Xterm
+XTerm*font: terminus-12
+XTerm*scrollBar: false
+XTerm*loginShell: true
+XTerm*saveLines: 1000
+XTerm*secondaryScroll: true
+
+URxvt*font: terminus-12
+URxvt.cursorColor: #cccccc
+URxvt*scrollBar: false
+URxvt*loginShell: true
+URxvt*saveLines: 1000
+URxvt*secondaryScroll: true
+!! make urls clickable
+!!URxvt.perl-ext-common:  default,matcher
+!!URxvt.urlLauncher:      /usr/local/bin/firefox
+!!URxvt.matcher.button:   1
+
+!! terminal color
+#include "/home/arun/.xcolours/default"
+
+!!xcalc
+#include "/home/arun/.xcolours/xcalc"
+
