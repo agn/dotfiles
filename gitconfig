@@ -1,0 +1,11 @@
+[user]
+	name = Arun G Nair
+	email = arun.g.nair@gmail.com
+
+[core]
+	editor = vim
+
+[color]
+	ui = auto
+[merge]
+	tool = vimdiff
