@@ -10,6 +10,7 @@
 HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 # ... or force ignoredups and ignorespace
 HISTCONTROL=ignoreboth
+HISTFILESIZE=5000
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -64,7 +65,12 @@ fi
 #calendar -A 4
 #export PS1='\[\e[0;36m\][\[\e[0;32m\]\w\[\e[0;36m\]]\$ \[\e[0;0m\]'
 export EDITOR=vi
-export PS1='\[\e[0;32m\][\[\e[0;36m\]\w\[\e[0;33m\]$(git_info)\[\e[0;32m\]]> \[\e[0;0m\]'
+
+#export PS1='\[\e[0;32m\][\[\e[0;36m\]\w\[\e[0;33m\]$(git_info)\[\e[0;32m\]]> \[\e[0;0m\]'
+export PS1='\[\e[0;32m\][\[\e[0;36m\]\w\[\e[0;33m\]\[\e[0;32m\]]> \[\e[0;0m\]'
+export PAGER=less
+export RI='--format ansi --width 78'
+export LESS='-R'
 
 ### functions ###
 git_info() {
@@ -88,6 +94,11 @@ t() {
 	fi
 }
 
+record() {
+	in=$1
+	ffmpeg -f alsa -ac 2  -f x11grab -r 30 -s 508x380 -i :0.0+35,110 -acodec pcm_s16le -vcodec libx264  -preset slow -crf 22 -threads 0 ${in}.mkv
+}
+
 ## tab completion with sudo ##
 #complete -fc sudo
 
@@ -102,11 +113,14 @@ alias lynx='lynx -nocolor -force_html'
 #alias xpdf='evince'
 alias bsd='irssi -c chat.taucher.net -n arun'
 alias irb='irb --simple-prompt'
-alias wifi='sudo wpa_supplicant -c /etc/wpa_supplicant.conf -i eth1 -B'
+alias wifi='sudo wpa_supplicant -c /etc/wpa_supplicant.conf -i wlan0 -B'
 alias vical='vi ~/.calendar/calendar'
 alias c='calendar'
-alias ruby1.9='/opt/ruby/bin/ruby'
-alias irb1.9='/opt/ruby/bin/irb'
+alias mtr='mtr -t'
+#alias clj='java -cp /opt/clojure/clojure-1.5.1.jar clojure.main'
+alias more=less
+#alias ruby1.9='/opt/ruby/bin/ruby'
+#alias irb1.9='/opt/ruby/bin/irb'
 
 calendar -A 10
 shopt -s cdspell
@@ -114,3 +128,14 @@ shopt -s histappend
 
 # start tmux when opening urxvt
 [ ! $TMUX -a $XAUTHORITY ] && tmux
+
+# Less Colors for Man Pages
+#export LESS_TERMCAP_mb=$'\E[01;31m'       # begin blinking
+#export LESS_TERMCAP_md=$'\E[01;38;5;74m'  # begin bold
+#export LESS_TERMCAP_me=$'\E[0m'           # end mode
+#export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
+#export LESS_TERMCAP_so=$'\E[38;5;246m'    # begin standout-mode - info box
+#export LESS_TERMCAP_ue=$'\E[0m'           # end underline
+#export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
+
+export PYTHONSTARTUP=~/.pythonrc
